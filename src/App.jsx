@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Button from "../src/components/Button";
+import styled from "@emotion/styled";
+import {Title} from "./components/Typography";
+
 
 /* const todos = [
 	{
@@ -16,6 +19,28 @@ import Button from "../src/components/Button";
 	},
 ]; */
 
+const Body = styled.div`
+	background: yellow;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-width: 80%;
+`;
+
+
+const Header = styled.div`
+	background: pink;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+const ListItem = styled.li`
+	list-style: none;
+`;
+
 const App = () => {
 	const [value, setValue] = useState("");
 	const [todos, setTodos] = useState([
@@ -25,9 +50,9 @@ const App = () => {
 		},
 	]);
 	return (
-		<div>
-			<div>
-				<h1>ToDo</h1>
+		<Body>
+			<Header>
+				<Title>ToDo</Title>
 				<input
 					type="text"
 					value={value}
@@ -44,12 +69,12 @@ const App = () => {
 				>
 					Add
 				</button>
-			</div>
+			</Header>
 
 			<ul>
 				{todos.map((todo, index) => {
 					return (
-						<li key={index}>
+						<ListItem key={index}>
 							<label>
 								<input
 									type="checkbox"
@@ -72,11 +97,11 @@ const App = () => {
 							>
 								Delete
 							</button>
-						</li>
+						</ListItem>
 					);
 				})}
 			</ul>
-		</div>
+		</Body>
 	);
 };
 
