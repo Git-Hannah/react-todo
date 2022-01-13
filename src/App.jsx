@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../src/components/Button";
 import styled from "@emotion/styled";
 import {Title} from "./components/Typography";
+import {v4 as uuid} from "uuid";
 
 
 /* const todos = [
@@ -74,7 +75,7 @@ const App = () => {
 			<ul>
 				{todos.map((todo, index) => {
 					return (
-						<ListItem key={index}>
+						<ListItem key={todo.id}>
 							<label>
 								<input
 									type="checkbox"
