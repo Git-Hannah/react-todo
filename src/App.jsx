@@ -4,43 +4,26 @@ import styled from "@emotion/styled";
 import {Title} from "./components/Typography";
 import {v4 as uuid} from "uuid";
 
-
-/* const todos = [
-	{
-		name: "Buy milk",
-		isChecked: true,
-	},
-	{
-		name: "clean kitchen",
-		isChecked: false,
-	},
-	{
-		name: "water plants",
-		isChecked: false,
-	},
-]; */
-
 const Body = styled.div`
-	background: yellow;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	max-width: 80%;
+background: yellow;
+margin: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+max-width: 80%;
 `;
-
-
 const Header = styled.div`
-	background: pink;
-	width: 80%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+background: pink;
+width: 80%;
+display: flex;
+flex-direction: column;
+align-items: center;
 `;
 const ListItem = styled.li`
-	list-style: none;
+list-style: none;
 `;
+
 
 const App = () => {
 	const [value, setValue] = useState("");
@@ -59,15 +42,15 @@ const App = () => {
 					value={value}
 					onChange={event_ => {
 						setValue(event_.target.value);
-					}} //here the video is blech!
-				/>
+					}}
+					/>
 				<button
 					disabled={!value}
 					onClick={() => {
 						setTodos([...todos, { name: value, isChecked: false }]);
 						setValue("");
 					}}
-				>
+					>
 					Add
 				</button>
 			</Header>
@@ -86,7 +69,7 @@ const App = () => {
 										update[index].isChecked = !update[index].isChecked;
 										setTodos(update);
 									}}
-								/>
+									/>
 								{todo.name}
 							</label>
 							<button
@@ -95,7 +78,7 @@ const App = () => {
 									update.splice(index, 1);
 									setTodos(update);
 								}}
-							>
+								>
 								Delete
 							</button>
 						</ListItem>
