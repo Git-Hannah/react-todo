@@ -1,5 +1,6 @@
 import express from "express";
 import { readFile, writeFile } from 'fs/promises';
+import { v4 as uuid } from 'uuid';
 
 const app = express();
 const port = 4000;
@@ -51,7 +52,7 @@ app.post("/api/todos/", async (request, response) => {
 
 	const todo = {
 		...request.body,
-		id: "something-unique",
+		id: uuid(),
 	};
 
 	json.todos.push(todo);
