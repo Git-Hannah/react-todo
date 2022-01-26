@@ -2,7 +2,10 @@
   "name": "react-bare-bone-template",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "server": "node server.js",
+    "dev-server": "nodemon server.js",
     "build": "react-scripts build",
     "spj": "npx sort-package-json@1.48 package.json",
     "dev": "react-scripts start",
@@ -13,7 +16,7 @@
     "@emotion/styled": "^11.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "uuid":"^8.3.2"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.37.2",
@@ -25,6 +28,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss-pseudo-classes": "^0.2.1",
     "postcss-syntax": "^0.36.2",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "react-scripts": "5.0.0",
     "stylelint": "^14.1.0",
