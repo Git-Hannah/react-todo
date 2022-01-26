@@ -9,17 +9,10 @@ app.get('/', (request, response) => {
 
 
   app.get('/todos/', (request, response) => {
-	  response.json(({
-		  toDos:
-		  {
-			  id: "First",
-			  name: "Second"
-		  },
-		  {
-			id: "Third",
-			name: "Fourth"
-		  },
-	  }))
+	  response.json([
+			  { id: 1, name: "First toDo"},
+		  { id: 2, name: "Second toDo"},
+	  ])
   })
 
   app.listen(port, () => {
