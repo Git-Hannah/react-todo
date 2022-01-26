@@ -18,22 +18,22 @@ const json = JSON.parse(data);
 console.log(json);
 
 // Variante 1, .then() - chaining :
-app.get("/api/todos/", (request, response) => {
+/* app.get("/api/todos/", (request, response) => {
 	readFile("./database/database.json", "utf8")
 	.then(data => JSON.parse(data))
 	.then(json => {
 		response.json(json.todos);
 	})
-});
+}); */
 
 // Variante 2, slight refactoring, only one .then() :
-app.get("/api/todos", (request, response) => {
+/* app.get("/api/todos", (request, response) => {
 	readFile("./database/database.json", "utf8")
 	.then(data => {
 		const json = JSON.parse(data);
 		response.json(json.todos);
 	});
-});
+}); */
 
 // Variante 3, async/await wird deutlich :
 app.get("/api/todos", async (request, response) => {
@@ -56,7 +56,7 @@ app.post("/api/todos/", async (request, response) => {
 	};
 
 	json.todos.push(todo);
-	await writeFile(DATABASE_URI, JSON.stringify(json));
+	await writeFile(DATABASE_URI, JSON.stringify(json, null, 4));
 	response.status(201);
 	response.json(todo);
 
