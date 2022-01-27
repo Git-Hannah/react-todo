@@ -1,6 +1,14 @@
+import cors from "cors";
 import express from "express";
-import { readFile, writeFile } from 'fs/promises';
-import { v4 as uuid } from 'uuid';
+import dotenv from "dotenv";
+
+import { readFile, writeFile } from "fs/promises";
+import { v4 as uuid } from "uuid";
+import { connectDatabase } from "./utils/database";
+
+if (!process.env.MONGODB_URI) {
+	throw new Error("No MONGODB_URI available in dotenv");
+}
 
 const app = express();
 const port = 4000;
@@ -10,8 +18,6 @@ app.use(express.json());
 app.get("/", (request, response) => {
 	response.send("Hello World!");
 });
-
-
 
 const data = await readFile("./database/database.json", "utf8");
 const json = JSON.parse(data);
@@ -42,7 +48,6 @@ app.get("/api/todos", async (request, response) => {
 	response.json(json.todos);
 });
 
-
 const DATABASE_URI = "./database/database.json";
 
 app.post("/api/todos/", async (request, response) => {
@@ -59,9 +64,10 @@ app.post("/api/todos/", async (request, response) => {
 	await writeFile(DATABASE_URI, JSON.stringify(json, null, 4));
 	response.status(201);
 	response.json(todo);
-
 });
 
-app.listen(port, () => {
-	console.log(`ToDoApp is listening on port ${port}`);
+connectDatabase(process.env.MONGODB_URI).then(() => {
+	app.listen(port, () => {
+		console.log(`ToDoApp is listening on port ${port}`);
+	});
 });
