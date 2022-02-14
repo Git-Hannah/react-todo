@@ -1,24 +1,8 @@
 import React, { useState } from "react";
 import Button from "../src/components/Button";
 import styled from "@emotion/styled";
-import {Title} from "./components/Typography";
-import {v4 as uuid} from "uuid";
-
-
-/* const todos = [
-	{
-		name: "Buy milk",
-		isChecked: true,
-	},
-	{
-		name: "clean kitchen",
-		isChecked: false,
-	},
-	{
-		name: "water plants",
-		isChecked: false,
-	},
-]; */
+import { Title } from "./components/Typography";
+import { v4 as uuid } from "uuid"; // Library für id, einfach die aktuelle Version ins package.json eintragen, und hier die version 4 eingeben
 
 const Body = styled.div`
 	background: yellow;
@@ -29,7 +13,6 @@ const Body = styled.div`
 	justify-content: center;
 	max-width: 80%;
 `;
-
 
 const Header = styled.div`
 	background: pink;
@@ -48,34 +31,40 @@ const App = () => {
 		{
 			name: "Buy milk",
 			isChecked: true,
+			id: uuid(),
 		},
 	]);
 	return (
 		<Body>
 			<Header>
 				<Title>ToDo</Title>
-				<input
-					type="text"
-					value={value}
-					onChange={event_ => {
-						setValue(event_.target.value);
-					}} //here the video is blech!
-				/>
-				<button
-					disabled={!value}
-					onClick={() => {
-						setTodos([...todos, { name: value, isChecked: false }]);
+				<h2>{value}</h2>
+				<form // onClick wird zu onSubmit und so kann auch Enter zum adden gedrückt werden
+					onSubmit={event_ => {
+						event_.preventDefault();
+						setTodos([...todos, { name: value, isChecked: false, id: uuid() }]);
 						setValue("");
 					}}
 				>
-					Add
-				</button>
+					<input
+						type="text"
+						value={value}
+						onChange={event_ => {
+							setValue(event_.target.value);
+						}}
+					/>
+					<button disabled={!value} type="submit">
+						Add
+					</button>
+				</form>
 			</Header>
 
 			<ul>
 				{todos.map((todo, index) => {
 					return (
 						<ListItem key={todo.id}>
+							{/* performanter als {index}, da nur ein konkretes Element neu gerendert */}
+							wird
 							<label>
 								<input
 									type="checkbox"
@@ -107,3 +96,39 @@ const App = () => {
 };
 
 export default App;
+
+// This was the hard coded list from the setup in the beginning:
+/* const todos = [
+	{
+		name: "Buy milk",
+		isChecked: true,
+	},
+	{
+		name: "clean kitchen",
+		isChecked: false,
+	},
+	{
+		name: "water plants",
+		isChecked: false,
+	},
+]; 
+// Das <div> bevor es ein <form> wurde:
+<div>
+					<input
+						type="text"
+						value={value}
+						onChange={event_ => {
+							setValue(event_.target.value);
+						}}
+					/>
+					<button
+						disabled={!value}
+						onClick={() => {
+							setTodos([...todos, { name: value, isChecked: false }]);
+							setValue("");
+						}}
+					>
+						Add
+					</button>
+				</div>
+*/
